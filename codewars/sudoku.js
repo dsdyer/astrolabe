@@ -1,3 +1,5 @@
+// Spoilers for: http://www.codewars.com/kata/5296bc77afba8baa690002d7
+
 function arrayCleaner(array) {  // Returns a deep copy of a multi-dimensional array
   let a = array.map(c => {
     if (c instanceof Array) return arrayCleaner(c);

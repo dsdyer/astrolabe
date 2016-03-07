@@ -1,3 +1,5 @@
+// Spoiler for: http://www.codewars.com/kata/526156943dfe7ce06200063e
+
 class Brace {
   constructor(type, mate) {
     this.type = type;

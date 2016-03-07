@@ -1,3 +1,5 @@
+// Spoilers for: http://www.codewars.com/kata/51b66044bce5799a7f000003
+
 class RomanNumerals {
   static toRoman(int) {
     // Takes an integer and returns the Roman numeral

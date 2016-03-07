@@ -1,3 +1,5 @@
+// Spoiler for: http://www.codewars.com/kata/5326ef17b7320ee2e00001df
+
 function isEquivalent(a, b) {
   let aProperties = Object.getOwnPropertyNames(a);
   let bProperties = Object.getOwnPropertyNames(b);

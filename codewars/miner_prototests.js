@@ -1,3 +1,7 @@
+// Spoilers for: http://www.codewars.com/kata/5326ef17b7320ee2e00001df
+// This was how I was doing "tests" for codewars kata before I opened
+// up the cw test API and started writing real ones.
+
 let map = [[true, true, true], [false, false, true], [true, true, true]];
 let answer = ["down", "down", "right", "right", "up", "up"];
 
@@ -107,6 +111,5 @@ function solve(map, start, end) {
   let x = new MineMap(saneMap, start, end);
   x.collapse();
 }
-
 
 solve(map, {x:0, y:0}, {x:2,y:0});

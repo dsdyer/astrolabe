@@ -1,8 +1,10 @@
+// Spoilers for: http://www.codewars.com/kata/536e7c7fd38523be14000ca2
+
 /**
  * @constructor Creates a new memory manager for the provided array.
  * @param {memory} An array to use as the backing memory.
  */
-function MemoryManager(memory){
+function MemoryManager(memory){  // Aww, it's an ES5 Class!
   this.memory = memory;
   this.blocks = [];  // A block is an object with index and size.
                      // Index+size is the first address not in the block
@@ -14,7 +16,7 @@ function MemoryManager(memory){
  * @returns {number} A pointer which is the index of the first location in the allocated block.
  * @throws If it is not possible to allocate a block of the requested size.
  */
-MemoryManager.prototype.allocate = function(size) {
+MemoryManager.prototype.allocate = function(size) {  // Look, it has methods and everything! <3
   // To do:
   // Find the best place to start a new block
 

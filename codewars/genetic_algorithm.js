@@ -1,3 +1,5 @@
+// Spoiler for: http://www.codewars.com/kata/526f35b9c103314662000007
+
 // A chromosome is a string of 0s and 1s representing a solution
 // to a given problem. fitness() is a function that takes a
 // chromosome and returns a number from 0-1 that represents the
