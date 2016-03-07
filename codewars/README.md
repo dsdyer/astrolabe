@@ -1,3 +1,5 @@
+#CODEWARS SPOILERS
+
 Links to kata challenges:
 
 Binary Genetic Algorithms: http://www.codewars.com/kata/526f35b9c103314662000007
