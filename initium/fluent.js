@@ -13,15 +13,16 @@
   'use strict';
 
   try {
-    var $chatInput = $('#chat_input');
+    var chatInput = document.getElementById('chat_input') || null;
+    var text = sessionStorage.fluentChatValue || null;
 
-  	$chatInput.on('keyup', function(e){
-        sessionStorage.fluentChatValue = chatInput.value || '';
-  		console.log(sessionStorage.fluentChatValue);
-  	});
-  } catch(e){
-      console.log('Fluent error: ', e);
+    if (text) {
+      chatInput.value = text;
+      chatInput.focus();
     }
 
-
+  	chatInput.addEventListener('keyup', function(e) {
+      sessionStorage.fluentChatValue = chatInput.value || '';
+  	});
+  } catch(e){}
 })();
