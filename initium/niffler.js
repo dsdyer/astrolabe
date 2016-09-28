@@ -11,14 +11,21 @@
 
 (function() {
   'use strict';
-  $(window).load(function(){
-      console.log('niffler is definitely running');
-      var gold = $('a').filter(function(i) {
-          var re = /^Collect\s\d+\sgold$/;
-          if (this.textContent.match(re)) {
-              console.log(this.textContent.match(re));
-          }
-          return this.textContent.match(re);
+    var safety = 0;
+    var intervalID = window.setInterval(function() {
+      if (safety > 10) {
+        window.clearInterval(intervalID);
+      }
+      $('.main-item-controls a').each(function(i) {
+        var re = /^Collect\s(\d+)\sgold$/;
+        var g = this.textContent.match(re) || [];
+        if (this.textContent.match(re)) {
+          this.click();
+          
+          $(this).after($('<p>Niffler collected ' + g[1] + ' gold for you!</p>'));
+          window.clearInterval(intervalID);
+        }
       });
-  });
+      safety++;
+    }, 200);
 })();
