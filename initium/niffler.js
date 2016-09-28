@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Niffler
 // @namespace    http://tampermonkey.net/
-// @version      0.0.1
+// @version      0.1.0
 // @description  Picks up gold for you!
 // @author       Dell
 // @match        *http://www.playinitium.com/*
