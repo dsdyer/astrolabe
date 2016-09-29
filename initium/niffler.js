@@ -17,7 +17,7 @@
         window.clearInterval(intervalID);
       }
       $('.main-item-controls a').each(function(i) {
-        var re = /^Collect\s(\d+)\sgold$/;
+        var re = /^Collect\s(\d*)\s?gold$/;
         var g = this.textContent.match(re) || [];
         if (this.textContent.match(re)) {
           this.click();
