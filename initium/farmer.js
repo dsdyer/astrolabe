@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Farmer
 // @namespace    http://tampermonkey.net/
-// @version      0.0.1
+// @version      0.1.0
 // @description  Looks around for you!
 // @author       Dell
 // @match        *http://www.playinitium.com/*
@@ -13,47 +13,29 @@
 
 (function() {
   'use strict';
+
+  var hpLimit = 0.8; // Change this to any number between 0 and 1. 
+                     // That is the fraction of your max hp where 
+                     //auto-exploring turns off Default is 80%
+
   var count = 0;
 
-  var farming = GM_getValue('farming', true);
-  console.log('farming: ', farming);
-    
+  var farming = GM_getValue('farming', true);    
 
   window.addEventListener('keypress', function(e) {
-    	// console.log('w is down');
-    	// console.log(e.key);
-
     if (e.key === 'z') {
-    	// console.log(e.key);
-
-     //  var y = window.setTimeout(function(){
-     //    farming = !farming;
-     //    console.log('farming: ', farming);
-
-     //    GM_setValue('farming', farming);
-     //    window.clearTimeout(x);
-     //  }, 1000);
-
-     //  window.addEventListener('keyup', function() {
-     //  	console.log('w is up');
-     //  	window.clearTimeout(y);
-     //  });
-
-
       count++;
       console.log('count: ', count);
 
+      if (count > 2) {
+        farming = !farming;
 
-    if (count > 2) {
-      farming = !farming;
-      console.log('farming: ', farming);
-
-      GM_setValue('farming', farming);
-      window.clearTimeout(x);
-    }
+        GM_setValue('farming', farming);
+        window.clearTimeout(x);
+      }
   } else {
-    count = 0;
-  }
+      count = 0;
+    }
   });
 
 
@@ -67,7 +49,7 @@
                                          .text()
                                          .split('/');
 
-    if (hp/maxhp >= 0.8) {
+    if (hp/maxhp >= hpLimit) {
       var buttonOne = $('.main-buttonbox a')[0];
       var buttonTwo = $('.main-buttonbox a')[1];
 
