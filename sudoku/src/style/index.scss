@@ -1,0 +1,86 @@
+@import 'reset';
+
+body {
+  /*margin: 0;*/
+}
+
+.game {
+  font: medium "Century Gothic", Futura, sans-serif;
+}
+
+.board-row {
+  flex: 1 1 0;
+  display: flex;
+  flex-flow: row;
+}
+
+.big-square {
+  flex: 1 1 0;
+  display: flex;
+  flex-flow: column;
+  border-bottom: 2px solid #000000;
+  border-left: 2px solid #000000;
+}
+
+.light {
+  background-color: #bbffbb;
+}
+
+.dark {
+  background-color: #bbbbff;
+}
+
+.square {
+  flex: 1 1 auto;
+  width: 1px;
+  margin: -1px -1px 0 0;
+  padding: 0;
+  border: 1px solid #999;
+  font-size: xx-large;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1;
+  background: transparent;
+}
+
+.square-row {
+  display: flex;
+  flex-flow: row;
+  flex: 1 1 0;
+}
+
+input.square {
+  outline: #0000ff solid 4px;
+  outline-offset: -4px;
+}
+
+.unlocked {
+  color: red;
+  font-family: cursive, sans-serif;
+}
+
+.controls button {
+  margin: 0 0 0 10px;
+  padding: 10px 20px;
+  font-size: 1.5em;
+  border-radius: 8px;
+}
+
+.game-board {
+  display: flex;
+  flex-flow: column;
+  margin-bottom: 1em;
+  width: 50vw;
+  height: 50vw;
+  min-width: 320px;
+  min-height: 320px;
+  max-width: 500px;
+  max-height: 500px;
+  border-top: 3px solid #000000;
+  border-right: 3px solid #000000;
+}
+
+.game-info {
+  margin-left: 100px;
+  max-width: 50%;
+}

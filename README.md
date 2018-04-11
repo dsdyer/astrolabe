@@ -1,3 +1,3 @@
 #Astrolabe
 
-Finding my way.
+Demos at: https://dsdyer.github.io/
