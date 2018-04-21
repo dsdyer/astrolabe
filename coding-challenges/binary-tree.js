@@ -62,37 +62,30 @@ class Tree {
 }
 
 
-function isBalanced(root, count = 0, leafDepths = new Set()) {
-// You need to track Left Depth and Right Depth separately
+function isBalanced(root, count = 0, activeNodes = []) {
+  const x = {
+    leftDepth: 0,
+    rightDepth: 0,
+    activeSide: 'left',
+  }
 
+  if (!root.left && !root.right) {
+    activeNodes.forEach(node => {
+      if (node.activeSide === 'left') {
+        node.leftDepth = node.leftDepth + 1;
+      }
 
-  if (root === null) {
+      if (node.activeSide === 'right') {
+        node.rightDepth = node.rightDepth + 1;
+      }
+    })
     return true;
   }
 
-  if (!root.left || !root.right) {
-    leafDepths.add(count);
-
-  }
-  if (!root.left && !root.right) {
-      // leafDepths.push(count);
-
-      console.log('Found leaf!');
-      console.log('val: ', root.val);
-      console.log('count: ', count);
-      console.log('leafDepths: ', leafDepths);
-
-    if ([...leafDepths].some(ld => Math.abs(ld - count) > 1 )) {
-      console.log('too deep!');
-      leafDepths.add(count);
-      return false;
-    } else {
-      leafDepths.add(count);
-      return true;
-    }
-  }
-  return isBalanced(root.left, count + 1, leafDepths) &&
-         isBalanced(root.right, count + 1, leafDepths);
+  return (!root.left  || isBalanced(root.left, count + 1, activeNodes.concat([x]))) &&
+         (!root.right || isBalanced(root.right, count + 1,
+                         activeNodes.concat([Object.assign(x, {activeSide: 'right'})]))) &&
+         Math.abs(x.leftDepth - x.rightDepth) <= 1;
 }
 
 
