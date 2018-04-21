@@ -61,30 +61,28 @@ class Tree {
   }
 }
 
-
-function isBalanced(root, count = 0, activeNodes = []) {
+var isBalanced = function (root, activeNodes = []) {
+  if (root === null) {
+    return true;
+  }
   const x = {
     leftDepth: 0,
-    rightDepth: 0,
-    activeSide: 'left',
+    rightDepth: 0
   }
 
   if (!root.left && !root.right) {
-    activeNodes.forEach(node => {
-      if (node.activeSide === 'left') {
-        node.leftDepth = node.leftDepth + 1;
-      }
-
-      if (node.activeSide === 'right') {
-        node.rightDepth = node.rightDepth + 1;
+    activeNodes.forEach((x, i, a) => {
+      if (x.activeSide === 'left') {
+        x.leftDepth = Math.max(x.leftDepth, a.length - i);
+      } else if (x.activeSide === 'right') {
+        x.rightDepth = Math.max(x.rightDepth, a.length - i);
       }
     })
     return true;
   }
 
-  return (!root.left  || isBalanced(root.left, count + 1, activeNodes.concat([x]))) &&
-         (!root.right || isBalanced(root.right, count + 1,
-                         activeNodes.concat([Object.assign(x, {activeSide: 'right'})]))) &&
+  return (!root.left  || isBalanced(root.left, activeNodes.concat([Object.assign(x, {activeSide: 'left'})]))) &&
+         (!root.right || isBalanced(root.right, activeNodes.concat([Object.assign(x, {activeSide: 'right'})]))) &&
          Math.abs(x.leftDepth - x.rightDepth) <= 1;
 }
 
