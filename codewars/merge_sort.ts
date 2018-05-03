@@ -24,7 +24,7 @@ function orderedSliceFactory(arr: Array<number>) {
     return index => {
       const sliced = [];
       while (index < arr.length) {
-        sliced.push(arr[index]);
+        sliced[sliced.length] = arr[index];
         index++;
       }
       return sliced;
@@ -32,7 +32,7 @@ function orderedSliceFactory(arr: Array<number>) {
   } else return index => {
     const sliced = [];
     while (arr.length - 1 - index >= 0) {
-      sliced.push(arr[arr.length - 1 - index]);
+      sliced[sliced.length] = arr[arr.length - 1 - index];
       index++;
     }
     return sliced;
@@ -52,18 +52,34 @@ function mergeArrays(arr1: Array<number>, arr2: Array<number>): Array<number> {
   const arr1orderedSlice = orderedSliceFactory(arr1);
   const arr2orderedSlice = orderedSliceFactory(arr2);
 
-  while(p1 < arr1.length && p2 < arr2.length) {
+  while (p1 < arr1.length && p2 < arr2.length) {
     if (arr1AtIndex(p1) <= arr2AtIndex(p2)) {
-      sorted[index] = arr1AtIndex(p1);
+      if (sorted[index -1] !== arr1AtIndex(p1)) {
+        sorted[index] = arr1AtIndex(p1);
+        index++;
+    };
       p1++;
-    } else {
-        sorted[index] = arr2AtIndex(p2);
-        p2++;
     }
-    index++;
+    else {
+      if (sorted[index -1] !== arr2AtIndex(p2)) {
+        sorted[index] = arr2AtIndex(p2);
+        index++;
+      };
+      p2++;
+    }
+  }
+  const arr1Unsorted = arr1orderedSlice(p1);
+  const arr2Unsorted = arr2orderedSlice(p2);
+  const unsorted = arr1Unsorted;
+
+  for (let num of arr2Unsorted) {
+          if (unsorted[unsorted.length - 1] !== num)
+              unsorted[unsorted.length] = num;
   }
 
-  const unsorted = arr1orderedSlice(p1).concat(arr2orderedSlice(p2));
-  sorted.splice(index, 0, ...unsorted);
-  return Array.from(new Set(sorted));
+  for (num of unsorted) {
+      if (sorted[sorted.length - 1] !== num)
+          sorted[sorted.length] = num;
+  }
+  return sorted;
 }
