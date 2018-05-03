@@ -1,14 +1,11 @@
+// https://www.codewars.com/kata/merge-two-sorted-arrays-into-one/javascript
 // Instructions:
 // You are given two sorted arrays that contain only integers. Your task is to find a way to merge them into a single one, sorted in ascending order. Complete the function mergeArrays(arr1, arr2), where arr1 and arr2 are the original sorted arrays.
 // You don't need to worry about validation, since arr1 and arr2 must be arrays with 0 or more Integers. If both arr1 and arr2 are empty, then just return an empty array.
 // Note: arr1 and arr2 may be sorted in different orders. Also arr1 and arr2 may have same integers. Remove duplicated in the returned result.
-// For Funsies:
-// This is an 8kyu problem, and the 1 line answer is pretty obviously return arr1.concat(arr2).sort();
-// I decided to do it without using built-in array methods, cause I wanted to play with TypeScript
+// This is an 8-kyu kata, and the 1 line solution is pretty obvious with sort, concat, and Set.
+// For Funsies, I decided to do it without using built-in array methods
 function orderedIndexFactory(arr) {
-    // takes a sorted array, returns a function that takes an index
-    // and returns that element from start of arr if arr is sorted
-    // ascending, otherwise returns that element from the end
     if (arr[0] <= arr[arr.length - 1]) {
         return index => arr[index];
     }
@@ -16,9 +13,6 @@ function orderedIndexFactory(arr) {
         return index => arr[arr.length - 1 - index];
 }
 function orderedSliceFactory(arr) {
-    // takes a sorted array, returns a function that takes an index
-    // and slices arr normally if arr is sorted
-    // ascending, otherwise slices arr backwards
     if (arr[0] <= arr[arr.length - 1]) {
         return index => {
             const sliced = [];
@@ -40,14 +34,13 @@ function orderedSliceFactory(arr) {
         };
 }
 function mergeArrays(arr1, arr2) {
+    // these are array access methods that index normally if the array is sorted lowest to highest,
+    // and index backwards from the end of the array if sorted highest to lowest
+    const arr1AtIndex = orderedIndexFactory(arr1), arr2AtIndex = orderedIndexFactory(arr2), arr1orderedSlice = orderedSliceFactory(arr1), arr2orderedSlice = orderedSliceFactory(arr2);
     const sorted = [];
-    let index = 0;
-    let p1 = 0;
-    let p2 = 0;
-    const arr1AtIndex = orderedIndexFactory(arr1);
-    const arr2AtIndex = orderedIndexFactory(arr2);
-    const arr1orderedSlice = orderedSliceFactory(arr1);
-    const arr2orderedSlice = orderedSliceFactory(arr2);
+    // current next index in the sorted array,
+    // pointers to the next unsorted number in each array
+    let index = 0, p1 = 0, p2 = 0;
     while (p1 < arr1.length && p2 < arr2.length) {
         if (arr1AtIndex(p1) <= arr2AtIndex(p2)) {
             if (sorted[index - 1] !== arr1AtIndex(p1)) {
@@ -68,12 +61,11 @@ function mergeArrays(arr1, arr2) {
     }
     const arr1Unsorted = arr1orderedSlice(p1);
     const arr2Unsorted = arr2orderedSlice(p2);
-    const unsorted = arr1Unsorted;
     for (let num of arr2Unsorted) {
-        if (unsorted[unsorted.length - 1] !== num)
-            unsorted[unsorted.length] = num;
+        if (arr1Unsorted[arr1Unsorted.length - 1] !== num)
+            arr1Unsorted[arr1Unsorted.length] = num;
     }
-    for (num of unsorted) {
+    for (let num of arr1Unsorted) {
         if (sorted[sorted.length - 1] !== num)
             sorted[sorted.length] = num;
     }
