@@ -3,8 +3,9 @@
 // You don't need to worry about validation, since arr1 and arr2 must be arrays with 0 or more Integers. If both arr1 and arr2 are empty, then just return an empty array.
 // Note: arr1 and arr2 may be sorted in different orders. Also arr1 and arr2 may have same integers. Remove duplicated in the returned result.
 // For Funsies:
-// This is an 8kyu problem, and the 1 line answer is pretty obviously return arr1.concat(arr2).sort();
+// This is an 8kyu problem, and the 1 line answer is pretty obviously return Array.from(new Set(arr1.concat(arr2))).sort((a,b) => a - b);
 // I decided to do it without using built-in array methods, cause I wanted to play with TypeScript
+
 function orderedIndexFactory(arr) {
     // takes a sorted array, returns a function that takes an index
     // and returns that element from start of arr if arr is sorted
