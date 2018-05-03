@@ -38,8 +38,6 @@ class Tree {
   }
 
   walkTree(node = this.root, fn) {
-    // console.log('fn: ', fn);
-    // console.log('typeof fn: ', typeof fn);
     if (node.left) {
       this.walkTree(node.left, fn);
     }
@@ -61,31 +59,21 @@ class Tree {
   }
 }
 
-var isBalanced = function (root, activeNodes = []) {
-  if (root === null) {
-    return true;
-  }
-  const x = {
-    leftDepth: 0,
-    rightDepth: 0
+var isBalanced = function (root) {
+  if (!root) {
+    return 0;
   }
 
-  if (!root.left && !root.right) {
-    activeNodes.forEach((x, i, a) => {
-      if (x.activeSide === 'left') {
-        x.leftDepth = Math.max(x.leftDepth, a.length - i);
-      } else if (x.activeSide === 'right') {
-        x.rightDepth = Math.max(x.rightDepth, a.length - i);
-      }
-    })
-    return true;
+  const left = isBalanced(root.left);
+  const right = isBalanced(root.right);
+
+  if (typeof left === 'number' && typeof right === 'number' && Math.abs(left - right) <= 1) {
+    return Math.max(left, right) + 1;
   }
 
-  return (!root.left  || isBalanced(root.left, activeNodes.concat([Object.assign(x, {activeSide: 'left'})]))) &&
-         (!root.right || isBalanced(root.right, activeNodes.concat([Object.assign(x, {activeSide: 'right'})]))) &&
-         Math.abs(x.leftDepth - x.rightDepth) <= 1;
+  return false;
+
 }
-
 
 const tree = new Tree();
 
@@ -124,6 +112,8 @@ tree.addValue(5);
 tree.addValue(3);
 tree.addValue(1);
 tree.addValue(2);
+
+
 
 
 
