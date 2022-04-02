@@ -1,3 +1,14 @@
+# Sudoku Terms
+* **Sudoku**: The whole puzzle
+* **grid**: 81 **cells** in a square shape, comprising:
+ * 9 **rows**
+ * 9 **columns** ()
+ * 9 **boxes**
+* **elements**: The **digit**s or **number**s allowed in the puzzle (1-9 for a traditional Sudoku)
+* **clues**: The initially defined values
+* **group**: A row, column, or box
+* **the One Rule**: Each digit appears once in each group
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
