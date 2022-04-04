@@ -5,7 +5,7 @@ class Cell extends React.Component {
   render() {
     return (
       <div className="cell">
-        Cell {this.props.digit}
+        {this.props.digit}
       </div>
     )
   }
